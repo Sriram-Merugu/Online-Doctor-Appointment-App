@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doc-Connect</title>
+
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap'>
+    <link rel="stylesheet" href="{{url_for('static', filename='./signin.css')}}">
+</head>
+<body>
+
+<!-- partial:index.partial.html -->
+ 
+
+<div class="wrapper">
+    <div class="login_box">
+     
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p style="color:red" >{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {%if forgot_e %}
+        <form action="{{ url_for('forgot_password')}}" method="post">
+            <p>Enter your user email</p>
+            <div class="input_box">
+                <input type="email" name="email" id="user" class="input-field" required>
+                <label for="user" class="label">Email</label>
+                <i class="bx bx-user icon"></i>
+            </div>
+            <div class="input_box">
+                <input type="submit" class="input-submit" value="Enter">
+            </div>
+
+        </form>
+        {% endif %}
+
+
+        {%if forgot_p %}
+        <form action="{{ url_for('valid_otp')}}" method="post">
+            <p>Enter the OTP, sent to your email</p>
+            <div class="input_box">
+                <input type="text" name="otp" class="input-field"  required>
+                <label for="user" class="label">Enter OTP</label>
+                <i class="bx bx-user icon"></i>
+            </div>
+          <div class="input_box">
+                <input type="submit" class="input-submit" value="Enter">
+            </div>
+            <div id="countdown"></div>
+        </form>
+        {% endif %}
+
+        
+        {%if new_pass %}
+        <form action="{{ url_for('change_pwd')}}" method="post">
+            <p>Enter your New Password</p>
+            <div class="input_box">
+                <input type="password" id="pass" name="password" class="input-field" required>
+                <label for="pass" class="label">New Password</label>
+
+                <i class="bx bx-lock-alt icon"></i>
+            </div>
+            
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" class="eye" onclick="myFunction()">
+                    <label for="remember">show password</label>
+                </div>
+                
+            </div>
+            <div class="input_box">
+                <input type="submit" class="input-submit" value="Enter">
+            </div>
+
+        </form>
+        {% endif %}
+
+
+
+    </div>
+</div>
+<!-- partial -->
+
+<script>
+
+    function myFunction() {
+      var x = document.getElementById("pass");
+
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+</script>
+
+<script>
+    // Set the initial value of the countdown
+    var countdownValue = 60;
+
+    // Function to update the countdown timer every second
+    function updateCountdown() {
+        // Display the current countdown value
+        document.getElementById('countdown').innerHTML = 'Time remaining: ' + countdownValue + ' seconds';
+
+        // Decrease the countdown value by 1
+        countdownValue--;
+
+        // If countdown reaches 0, stop the countdown
+        if (countdownValue < 0) {
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'Time expired';
+            // Optionally, you can disable the submit button here or perform other actions
+        }
+    }
+
+    // Call the updateCountdown function every second
+    var timer = setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>

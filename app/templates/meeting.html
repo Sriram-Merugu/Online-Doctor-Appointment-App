@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Meeting</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style2.css')}}">
+    <style>
+        #root {
+            width: 100vw;
+            height: 100vh;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <!-- It's a good practice to use a more descriptive class name than "back-to-dashboard" -->
+    <div class="back-to-dashboard">
+        <a href="{{ url_for('doctor') }}" style="text-decoration: none;">
+            <!-- It's a good practice to use a more descriptive button text than "Back to Dashboard" -->
+            <button>Back to Home</button>
+        </a>
+    </div>
+
+</body>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+window.onload = function () {
+    function getUrlParams(url) {
+        let urlStr = url.split('?')[1];
+        const urlSearchParams = new URLSearchParams(urlStr);
+        const result = Object.fromEntries(urlSearchParams.entries());
+        return result;
+    }
+
+    // It's a good practice to move the following code to a separate JavaScript file
+    // const roomID = getUrlParams(window.location.href)['roomID'] ||({{id}}+ "");
+    const roomID = (getUrlParams(window.location.href)['roomID'] || id) + "";
+    const userID = Math.floor(Math.random() * 10000) + "";
+    const userName = "{{user_name}}";
+    const appID = 1650059750;
+    const serverSecret = "adbd14d7468f889c3f4f4613f0e1f7f8";
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+    const zp = ZegoUIKitPrebuilt.create(kitToken);
+    zp.joinRoom({
+        container: document.querySelector("#root"),
+        sharedLinks: [{
+            name: 'Personal link',
+            url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+        }],
+        scenario: {
+            mode: ZegoUIKitPrebuilt.VideoConference,
+        },
+
+       	turnOnMicrophoneWhenJoining: true,
+       	turnOnCameraWhenJoining: true,
+       	showMyCameraToggleButton: true,
+       	showMyMicrophoneToggleButton: true,
+       	showAudioVideoSettingsButton: true,
+       	showScreenSharingButton: true,
+       	showTextChat: true,
+       	showUserList: true,
+       	maxUsers: 2,
+       	layout: "Auto",
+       	showLayoutButton: false,
+
+    });
+}
+</script>
+
+</html>

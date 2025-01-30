@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electronic Health Record</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+  <header class="header2">
+    <h1>Electronic Health Record</h1>
+    <nav class="nav2">
+      <ul>
+        <li><a href="#patient-summary" class="active">Patient Summary</a></li>
+        <li><a href="#medical-history">Medical History</a></li>
+        <li><a href="#medications">Medications</a></li>
+        <li><a href="#allergies">Allergies</a></li>
+        <li><a href="#immunizations">Immunizations</a></li>
+        <li><a href="#lab-results">Lab Results</a></li>
+        <li><a href="#clinical-notes">Clinical Notes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main2" >
+    <div class="patient-info">
+      <h2>Patient Information</h2>
+      <p>Name: <span id="patient-name"></span></p>
+      <p>Date of Birth: <span id="patient-dob"></span></p>
+    </div>
+
+    <section id="patient-summary" class="section2" >
+      <h2>Patient Summary</h2>
+      <p>Current Conditions: <span>Asthma, Hypertension</span></p>
+      <p>Allergies: <span>Penicillin</span></p>
+      <p>Recent Visits: <span>02/15/2023 - Follow-up visit</span></p>
+    </section>
+
+    <section id="medical-history" style="display: none;" class="section2">
+      <h2>Medical History</h2>
+      <ul>
+        <li>
+          <h3>Condition: Asthma</h3>
+          <p>Diagnosed: 01/01/2010</p>
+          <p>Notes: Controlled with inhalers</p>
+        </li>
+        <li>
+          <h3>Condition: Hypertension</h3>
+          <p>Diagnosed: 05/15/2018</p>
+          <p>Notes: Controlled with medication</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="medications" style="display: none;" class="section2">
+      <h2>Medications</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Medication</th>
+            <th>Dosage</th>
+            <th>Instructions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lisinopril</td>
+            <td>10 mg</td>
+            <td>Once daily</td>
+          </tr>
+          <tr>
+            <td>Albuterol Inhaler</td>
+            <td>90 mcg/actuation</td>
+            <td>As needed for asthma symptoms</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="allergies"  class="section2" style="display: none;">
+      <h2>Allergies</h2>
+      <ul>
+        <li>
+          <h3>Allergen: Penicillin</h3>
+          <p>Reaction: Rash, difficulty breathing</p>
+          <p>Severity: Severe</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="immunizations" class="section2" style="display: none;">
+      <h2>Immunizations</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Vaccine</th>
+            <th>Date Administered</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Influenza</td>
+            <td>10/15/2022</td>
+            <td>Annual flu shot</td>
+          </tr>
+          <tr>
+            <td>Tdap</td>
+            <td>06/01/2020</td>
+            <td>Tetanus, diphtheria, and pertussis booster</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="lab-results" class="section2" style="display: none;">
+      <h2>Lab Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Test Name</th>
+            <th>Result</th>
+            <th>Reference Range</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CBC</td>
+            <td>Within normal limits</td>
+            <td>-</td>
+            <td>02/15/2023</td>
+          </tr>
+          <tr>
+            <td>Lipid Panel</td>
+            <td>
+              <p>Total Cholesterol: 210 mg/dL</p>
+              <p>LDL: 130 mg/dL</p>
+              <p>HDL: 45 mg/dL</p>
+              <p>Triglycerides: 150 mg/dL</p>
+            </td>
+            <td>
+              <p>Total Cholesterol: &lt; 200 mg/dL</p>
+              <p>LDL: &lt; 100 mg/dL</p>
+              <p>HDL: &gt; 40 mg/dL</p>
+              <p>Triglycerides: &lt; 150 mg/dL</p>
+            </td>
+            <td>02/15/2023</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="clinical-notes" class="section2" style="display: none;">
+      <h2>Clinical Notes</h2>
+      <ul>
+        <li>
+          <h3>Date: 02/15/2023</h3>
+          <p>Provider: Dr. Jane Smith</p>
+          <p>Chief Complaint: Follow-up visit for asthma and hypertension</p>
+          <p>Assessment: Asthma well-controlled with current medication. Hypertension slightly elevated, consider increasing lisinopril dosage.</p>
+          <p>Plan: Increase lisinopril to 20 mg daily. Follow up in 3 months.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="../static/JS/script.js"></script>
+</body>
+</html>

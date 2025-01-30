@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Chat</title>
+</head>
+<body>
+    <div id="video-container">
+        <video id="local-video" autoplay></video>
+        <video id="remote-video" autoplay></video>
+    </div>
+    <input type="text" id="room-id" placeholder="Enter room ID">
+    <button id="join-btn">Join</button>
+    <button id="leave-btn">Leave</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const localVideo = document.getElementById('local-video');
+        const remoteVideo = document.getElementById('remote-video');
+        const joinButton = document.getElementById('join-btn');
+        const leaveButton = document.getElementById('leave-btn');
+        const roomIdInput = document.getElementById('room-id');
+        let roomID;
+        let peerConnection;
+
+        // Get user media
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                localVideo.srcObject = stream;
+                initializePeerConnection(stream);
+            })
+            .catch(error => {
+                console.error('Error accessing media devices:', error);
+            });
+
+        // Initialize peer connection
+        function initializePeerConnection(stream) {
+            peerConnection = new RTCPeerConnection();
+            peerConnection.ontrack = handleTrackEvent;
+            peerConnection.addStream(stream);
+        }
+
+        // Join room
+        joinButton.addEventListener('click', () => {
+            roomID = roomIdInput.value;
+            if (roomID) {
+                socket.emit('join', { room: roomID });
+            }
+        });
+
+        // Leave room
+        leaveButton.addEventListener('click', () => {
+            socket.emit('leave', { room: roomID });
+        });
+
+        // Handle room join
+        socket.on('joined', data => {
+            console.log(data.message);
+        });
+
+        // Handle room leave
+        socket.on('left', data => {
+            console.log(data.message);
+        });
+
+        // Handle track event
+        function handleTrackEvent(event) {
+            remoteVideo.srcObject = event.streams[0];
+        }
+    </script>
+</body>
+</html>

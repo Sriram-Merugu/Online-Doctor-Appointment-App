@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc-Connect</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='./style.css')}}">
+    <script src="https://kit.fontawesome.com/382c9e01c9.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+    <div class="container-back">
+
+    <div id="header">
+        <div class="container">
+            <!-- Navbar -->
+            <nav>
+                <a href="{{url_for('profile')}}"><img src="{{url_for('static',filename='images/profile.png')}}" alt="profile"></a>
+                <img src="static/images/logo.png" class="logo">
+                <ul id="sidemenue">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#Doctors">Doctors</a></li>
+                    {% if not home_page %}
+                    <li><a href="#contact">Contact Us</a></li>
+                    {% endif %}
+                    {% if home_page %}
+                    <li><a href="{{ url_for('signin') }}">Signin</a></li>
+                    {% else%}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% endif %}
+                    <i class="fa-solid fa-xmark" onclick="closemenue()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenue()"></i>
+            </nav>
+            <div class="headertext">
+                <h3>Easy Online Doctor Consultation</h3>
+                
+                <h1>
+                    <span>Doc<span>Connect</span></span>
+                </h1>
+            
+            </div>
+        </div>
+
+    </div>
+
+

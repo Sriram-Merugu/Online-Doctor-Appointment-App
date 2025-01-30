@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>doctors</title>
+<link rel="stylesheet" href="{{url_for('static',filename='doctors.css')}}">
+<!-- Add your stylesheet link here -->
+</head>
+<body>
+
+  <div class="doctor-profile">
+ <div class="profile">
+    <img src="{{url_for('static',filename='images/doctors/doc'+doc.sno+'.jpg')}}" alt="profile" >
+    <div class="detail">
+        <!-- <h1>Dr. Emily Rodriguez, MD</h1> -->
+        <h1>{{ doc.name }}</h1>
+
+    <p> {{doc.specialty}}</p>
+    </div>
+    
+ </div>
+
+<div class="buttons">
+    
+ <button onclick="showSection('overview')">Overview</button>
+ <button onclick="showSection('experience')">Experience</button>
+ <button onclick="showSection('reviews')">Reviews</button>
+
+</div> 
+
+
+ <section id="overview" class="content">
+   <h2>Overview</h2>
+   <section class="education">
+
+     <h3>Education and Qualifications:</h3>
+     <p>Medical School: {{doc.school}}</p>
+     <p>Residency: {{doc.residency}}</p>
+     <p>Fellowship: {{doc.fellowship}}</p>
+   </section>
+ 
+   <section class="licensure">
+     <h3>Licensure and Certification:</h3>
+     <p>{{doc.certified}}</p>
+     <p>{{doc.license}}</p>
+   </section>
+ 
+   <section class="languages">
+     <h3>Languages Spoken:</h3>
+     <p>{{doc.lang}}</p>
+   </section>
+ 
+   <section class="availability">
+     <h3>Consultation Availability:</h3>
+     <p>Available Monday to Friday, 9:00 AM - 5:00 PM (PST)</p>
+     <p>Virtual appointments available</p>
+   </section>
+ 
+   <section class="insurance">
+     <h3>Accepted Insurance Plans:</h3>
+     <p>Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare</p>
+   </section>
+ </section>
+ 
+ <section id="experience" class="content hidden">
+   <h2>Experience</h2>
+   <section class="experience">
+     <h3>Professional Experience:</h3>
+     <p>{{doc.experience}}</p>
+     <!-- <p>Assistant Professor of Cardiology, Stanford University School of Medicine</p> -->
+   </section>
+ </section>
+ 
+ <section id="reviews" class="content hidden">
+   <h2>Reviews</h2>
+   <section class="reviews">
+     <h3>Patient Reviews and Ratings:</h3>
+     <p>Average rating: 4.8/5</p>
+     <blockquote>"{{doc.name}} is incredibly knowledgeable and caring. She took the time to listen to my concerns and provided clear explanations about my condition." - Patient Testimonial</blockquote>
+   </section>
+ </section>
+ 
+</div>
+
+
+
+<script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content');
+      
+      sections.forEach(section => {
+        if (section.id === sectionId) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

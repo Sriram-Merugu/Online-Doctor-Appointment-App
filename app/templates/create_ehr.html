@@ -1,0 +1,86 @@
+<!-- templates/ehr_form.html -->
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/ehr.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='JS/ehr.js') }}"></script>
+{% endblock %}
+
+{% block title %}Electronic Health Record{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4 mb-4 text-center">Electronic Health Record</h1>
+    <form method="post" class="ehr-form"  action="{{ url_for('create_ehr')}}" >
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ wtf.form_field(form.patient_name, class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ wtf.form_field(form.patient_dob, class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ wtf.form_field(form.current_conditions, class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ wtf.form_field(form.allergies, class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ wtf.form_field(form.recent_visits, class="form-control") }}
+        </div>
+        <div class="form-section">
+            <h3>Medical History</h3>
+            {% for field in form.medical_history %}
+                {{ wtf.form_field(field, class="form-control") }}
+            {% endfor %}
+            <!-- <button type="button" class="btn btn-secondary add-field" data-field="medical_history">Add Medical History</button> -->
+        </div>
+        <div class="form-section">
+            <h3>Medications</h3>
+            {% for field in form.medications %}
+                {{ wtf.form_field(field, class="form-control") }}
+            {% endfor %}
+            <!-- <button type="button" class="btn btn-secondary add-field" data-field="medications">Add Medication</button> -->
+        </div>
+        <div class="form-section">
+          <h3>Allergies</h3>
+          {% for field in form.add_allergies %}
+              {{ wtf.form_field(field, class="form-control") }}
+          {% endfor %}
+          <!-- <button type="button" class="btn btn-secondary add-field" data-field="add_allergies">Add Allergy</button> -->
+      </div>
+      <div class="form-section">
+        <h3>Immunizations</h3>
+        {% for field in form.immunizations %}
+            {{ wtf.form_field(field, class="form-control") }}
+        {% endfor %}
+        <!-- <button type="button" class="btn btn-secondary add-field" data-field="immunizations">Add Immunization</button> -->
+    </div>
+    <div class="form-section">
+      <h3>Lab Results</h3>
+      {% for field in form.lab_results %}
+          {{ wtf.form_field(field, class="form-control") }}
+      {% endfor %}
+      <!-- <button type="button" class="btn btn-secondary add-field" data-field="lab_results">Add Lab Result</button> -->
+  </div>
+  <div class="form-section">
+    <h3>Clinical Notes</h3>
+    {% for field in form.clinical_notes %}
+        {{ wtf.form_field(field, class="form-control") }}
+    {% endfor %}
+    <!-- <button type="button" class="btn btn-secondary add-field" data-field="clinical_notes">Add Clinical Note</button> -->
+</div>
+
+
+
+        <!-- Similar sections for immunizations, lab results, and clinical notes -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

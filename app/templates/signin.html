@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doc-Connect</title>
+
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap'>
+    <link rel="stylesheet" href="{{url_for('static', filename='./signin.css')}}">
+</head>
+<body>
+
+<!-- partial:index.partial.html -->
+ 
+
+<div class="wrapper">
+    <div class="login_box">
+        <div class="login-header">
+      <span>
+      {% if signup_page %}
+      Sign Up
+      {% else %}
+      Sign In
+      {% endif %}
+      </span>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p style="color:red" >{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('signup') if signup_page else  url_for('signin')}}" method="post">
+
+            {% if signup_page %}
+            <div class="input_box">
+                <input type="text" name="name" class="input-field" required>
+                <label for="user" class="label">Name</label>
+                <i class="bx bx-user icon"></i>
+            </div>
+            {% endif %}
+            <div class="input_box">
+                <input type="email" name="email" id="user" class="input-field" required>
+                <label for="user" class="label">Email</label>
+                <i class="bx bx-user icon"></i>
+            </div>
+
+
+            <div class="input_box">
+                <input type="password" id="pass" name="password" class="input-field" required>
+                <label for="pass" class="label">Password</label>
+
+
+                <i class="bx bx-lock-alt icon"></i>
+
+                
+            </div>
+
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" class="eye" onclick="myFunction()">
+                    <label for="remember">show password</label>
+                </div>
+                {% if not signup_page %}
+
+                <div class="forgot">
+                    <a href="{{url_for('forgot_password')}}">Forgot password?</a>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <div class="input_box">
+                <input type="submit" class="input-submit" value="{{'Sign Up' if signup_page else 'Sign In'}}">
+            </div>
+
+            {% if not signup_page %}
+
+            <div class="register">
+                <span>Don't have an account? <a href="{{url_for('signup')}}">Sign Up</a></span>
+            </div>
+            {% endif %}
+
+        </form>
+
+    </div>
+</div>
+<!-- partial -->
+
+<script>
+
+    function myFunction() {
+      var x = document.getElementById("pass");
+
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+</script>
+</body>
+</html>

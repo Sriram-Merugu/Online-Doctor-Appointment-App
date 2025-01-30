@@ -1,0 +1,211 @@
+{% include "header.html" %}
+<!--------------------------------------- ABOUT -------------------------------------->
+
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="static/images/about.png">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-tittle">
+                    About us
+                </h1>
+                <p> DocConnect is steadfastly committed to revolutionizing healthcare in India, with the aim of making
+                    it both affordable and accessible for over a billion people. We are driven by the conviction that
+                    every individual has the right to accurate, comprehensive, and carefully vetted information and
+                    care, which empowers them to make informed healthcare decisions.</p>
+
+
+
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-title">our mission <img src="../static/images/down-arrow.png" alt="icon"
+                                class="arrow-icon"> </div>
+                        <div class="accordion-content">We offer a wide range of services tailored to meet the diverse
+                            needs of our users. From online consultations and digital health records to health tips and
+                            preventive care, we provide a comprehensive healthcare solution at your fingertips. Our
+                            platform connects users with healthcare professionals across various specialties, ensuring
+                            that you always have access to expert advice when you need it.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title">our offrings <img src="../static/images/down-arrow.png" alt="icon"
+                                class="arrow-icon"></div>
+                        <div class="accordion-content">We offer a wide range of services tailored to meet the diverse
+                            needs of our users. From online consultations and digital health records to health tips and
+                            preventive care, we provide a comprehensive healthcare solution at your fingertips. Our
+                            platform connects users with healthcare professionals across various specialties, ensuring
+                            that you always have access to expert advice when you need it.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title">our approach to healthcare <img
+                                src="../static/images/down-arrow.png" alt="icon" class="arrow-icon"></div>
+                        <div class="accordion-content">Our approach to healthcare is holistic and patient-centric. We
+                            understand that healthcare is not just about treating diseases but about comprehensive
+                            well-being. Therefore, we focus on preventive care and health education, empowering our
+                            users to take charge of their health. We leverage technology to provide personalized care,
+                            ensuring that our users get the right care at the right time.</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<!------------------------------------------ sercices -------------------------------------->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">Our services</h1>
+        <div class="services-list">
+            <div>
+                <!-------------------logo ---------------------->
+                <a href="{{'/form' if not home_page else '/signin'}}"> 
+                    <i class="fa-solid fa-video"></i>
+                    <h2>Video chat with doc</h2>
+                </a>
+            </div>
+            <div>
+
+                <a href="{{'/appointment' if not home_page else '/signin'}}">
+                    <i class="fa-regular fa-calendar-check"></i><!-------------------logo ---------------------->
+                    <h2>Book your appointments</h2>
+                </a>
+            </div>
+            <div>
+                <a href="{{'/docs' if not home_page else '/signin'}}">
+                    <i class="fa-brands fa-rocketchat"></i><!-------------------logo ---------------------->
+                    <h2>Chat with your Doc</h2>
+    
+                </a>
+            </div>
+            <div>
+
+                <!-- <a href="{{'/docs' if not home_page else '/signin'}}"><span>Click here to chat</span></a></a> -->
+                <a href="#"> <i class="fa-solid fa-comment"></i><!-------------------logo ---------------------->
+                    <h2>Chat with our new AI Bot</h2>
+                    <p></p>
+                </a>
+            </div>
+
+            <div>
+
+                <!-- <a href="{{'/docs' if not home_page else '/signin'}}"><span>Click here to chat</span></a></a> -->
+                <a href="{{'/ehr/create' if not home_page else '/signin'}}"> <i class="fa-solid fa-comment"></i><!-------------------logo ---------------------->
+                    <h2>EHR</h2>
+                    <p></p>
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<!--      Doctors  -->
+
+<div id="Doctors">
+    <div class="container">
+        <h1 class="sub-title">Our Doctors</h1>
+        <div class="work-list">
+            <button class="left" onclick="leftScroll()">
+                <i class="fas fa-angle-double-left"></i>
+            </button>
+
+            <div class="scroll-images">
+                {% for i in range(1,6) %}
+                <div class="work">
+                    <img src="static/images/doctors/doc{{i}}.jpg">
+                    <div class="layer">
+                        <p></p>
+                        <a href="{{url_for('doctors', sno=i)}}"><i class="fa-solid fa-link"></i></a>
+                        <p>view doc</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+            <button class="right" onclick="rightScroll()">
+                <i class="fas fa-angle-double-right"></i>
+            </button>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--------------------------------- contact ---------------------------------------->
+<div id="contact">
+    {% if not home_page %}
+
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h2 class="sub-tittle">contact us</h2>
+                <p><i class="fa-regular fa-paper-plane"></i>docconnect@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i>9908034934</p>
+                <div class="social-icon">
+                    <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                <a href="https://fsph.iupui.edu/doc/10-Tips-Healthy-Lifestyle.pdf" class="btn btn2">Tips</a>
+
+            </div>
+            <div class="contact-right">
+                <form name="t" action="/contact" method="POST">
+                    <input type="text" name="name" placeholder="yourname" required>
+                    <input type="email" name="email" placeholder="youremail" required>
+                    <textarea name="message" rows="6" placeholder="your message"></textarea>
+                    <button type="submit" name="submit" class="btn btn2">submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+
+
+
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="copyright">
+        <p>copyright &copy;All rights reserve developer sriram, {{year}}</p>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+<script src="../static/JS/index.js"></script>
+
+<!-- For chat bot -->
+<!-- <script>
+window.embeddedChatbotConfig = {
+chatbotId: "3GMXaxBSjY7RvfHEwCaxj",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="3GMXaxBSjY7RvfHEwCaxj"
+domain="www.chatbase.co"
+defer>
+</script> -->
+
+</body>
+
+</html>

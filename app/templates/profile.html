@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc-Connect</title>
+<link rel="stylesheet" href="{{url_for('static',filename='CSS/profile.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+</head>
+<body>
+      
+
+
+<nav class="main-menu">
+                  <ul>
+                      <li class="has-subnav">
+                          <a href="#first">
+                              <i class="fa fa-home fa-2x"></i>
+                              <span class="nav-text">
+                                 Profile
+                              </span>
+                          </a>
+                        
+                      </li>
+                      <li class="has-subnav">
+                          <a href="#second">
+                              <i class="fa fa-globe fa-2x"></i>
+                              <span class="nav-text">
+                                  Appointments
+                              </span>
+                          </a>
+                          
+                      </li>
+                      <li class="has-subnav">
+                          <a href="#third">
+                             <i class="fa fa-comments fa-2x"></i>
+                              <span class="nav-text">
+                                  EHR
+                              </span>
+                          </a>
+                          
+                      </li>
+              </nav>
+       
+
+              <div>
+                
+              <div id="first" class="content-section">
+                <!-- Profile content goes here -->
+                <header>
+                    <h1>User Profile</h1>
+                </header>        
+                <div class="container1">
+        
+                    <form id="profileForm"  action="{{ url_for('profile')}}" method="post" >
+                        <div class="form-group">
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            {% for message in messages %}
+                            <p style="color:red" >{{ message }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                    
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" value="{{user.name}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="{{user.email}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" id="phone" name="phone" value="{{user.phone}}" >
+                        </div>
+                        <div class="form-group">
+                            <label for="password">New Password:</label>
+                            <input type="password" id="password" name="password" minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" minlength="6">
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                
+                
+                </div>
+              </div>
+              
+              <div id="second" class="content-section" style="display: none;">
+                <!-- Appointments content goes here -->
+                <header>
+                    <h1>Appointments</h1>
+                </header>        
+                <div class="container">
+                    <!-- <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2> -->
+                    <ul class="responsive-table">
+                      <li class="table-header">
+                        <div class="col col-1">Name</div>
+                        <div class="col col-2">Email</div>
+                        <div class="col col-3">Diagnosis</div>
+                        <div class="col col-4">Symptoms</div>
+                        <div class="col col-5">Status</div>
+                      </li>
+                      <li class="table-row">
+                        <div class="col col-1" data-label="Name">Sriram</div>
+                        <div class="col col-2" data-label="Email">Asta@gmail.com</div>
+                        <div class="col col-3" data-label="Diagnosis">Fever</div>
+                        <div class="col col-4" data-label="Symptoms">Butterflies in my stomach, rats in the head</div>
+                        <div class="col col-5" data-label="Status">Pending</div>
+                        
+                      </li>
+                   
+                      <li class="table-row">
+                        <div class="col col-1" data-label="Name">Sriram</div>
+                        <div class="col col-2" data-label="Email">Asta@gmail.com</div>
+                        <div class="col col-3" data-label="Diagnosis">Fever</div>
+                        <div class="col col-4" data-label="Symptoms">Butterflies in my stomach, rats in the head</div>
+                        <div class="col col-5" data-label="Status">Pending</div>
+                        
+                      </li>
+                   
+                   
+                    </ul>
+                  </div>
+            
+            
+            
+            </div>
+              
+              <div id="third" class="content-section" style="display: none;">
+                <!-- EHR content goes here -->
+    
+
+    <header class="header2">
+      <h1>Electronic Health Record</h1>
+      <nav class="nav2">
+        <ul>
+          <li><a href="#patient-summary" class="active">Patient Summary</a></li>
+          <li><a href="#medical-history">Medical History</a></li>
+          <li><a href="#medications">Medications</a></li>
+          <li><a href="#allergies">Allergies</a></li>
+          <li><a href="#immunizations">Immunizations</a></li>
+          <li><a href="#lab-results">Lab Results</a></li>
+          <li><a href="#clinical-notes">Clinical Notes</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <main class="main2" >
+      <div class="patient-info">
+        <h2>Patient Information</h2>
+        <p>Name: <span id="patient-name"></span></p>
+        <p>Date of Birth: <span id="patient-dob"></span></p>
+      </div>
+  
+      <section id="patient-summary" class="section2" >
+        <h2>Patient Summary</h2>
+        <p>Current Conditions: <span>Asthma, Hypertension</span></p>
+        <p>Allergies: <span>Penicillin</span></p>
+        <p>Recent Visits: <span>02/15/2023 - Follow-up visit</span></p>
+      </section>
+  
+      <section id="medical-history" style="display: none;" class="section2">
+        <h2>Medical History</h2>
+        <ul>
+
+          {% for his in medical_his %}
+
+          <li>
+
+            <h3>Condition: {{his.condition}}</h3>
+            <p>Diagnosed: {{his.diagnosed}}</p>
+            <p>Notes: {{his.notes}}</p>
+          </li>
+          {% endfor %}
+
+        </ul>
+      </section>
+  
+      <section id="medications" style="display: none;" class="section2">
+        <h2>Medications</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Medication</th>
+              <th>Dosage</th>
+              <th>Instructions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for med in medication %}
+            <tr>
+              <td>{{med.name}}</td>
+              <td>{{med.dosage}}</td>
+              <td>{{med.instructions}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+  
+      <section id="allergies"  class="section2" style="display: none;">
+        <h2>Allergies</h2>
+        <ul>
+          {% for alle in allergies %}
+          <li>
+            <h3>Allergen: {{alle.allergen}}</h3>
+            <p>Reaction: {{alle.reaction}}</p>
+            <p>Severity: {{alle.severity}}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+  
+      <section id="immunizations" class="section2" style="display: none;">
+        <h2>Immunizations</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Vaccine</th>
+              <th>Date Administered</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in immune %}
+            <tr>
+              <td>{{i.vaccine}}</td>
+              <td>{{i.date_administered}}</td>
+              <td>{{i.notes}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+  
+      <section id="lab-results" class="section2" style="display: none;">
+        <h2>Lab Results</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Test Name</th>
+              <th>Result</th>
+              <th>Reference Range</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for res in lab_result %}
+            <tr>
+              <td>{{res.test_name}}</td>
+              <td>{{res.result}}</td>
+              <td>{{res.reference_range}}</td>
+              <td>{{res.date}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+  
+      <section id="clinical-notes" class="section2" style="display: none;">
+        <h2>Clinical Notes</h2>
+        <ul>
+          {% for note in notes %}
+          <li>
+            <h3>Date: {{note.date}}</h3>
+            <p>Provider: {{note.provider}}</p>
+            <p>Chief Complaint: {{note.chief_complaint}}</p>
+            <p>Assessment: {{note.assessment}}</p>
+            <p>Plan: {{note.plan}}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+
+              </div>
+            
+            
+            </div>
+
+
+
+
+</body>
+
+<script src="../static/JS/script.js"></script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const links = document.querySelectorAll('nav.main-menu a');
+  const contentSections = document.querySelectorAll('.content-section');
+
+  function showSection(sectionId) {
+    contentSections.forEach(section => {
+      section.style.display = 'none';
+    });
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+      targetSection.style.display = 'block';
+    }
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      const sectionId = this.getAttribute('href').slice(1);
+      showSection(sectionId);
+    });
+  });
+});
+</script>
+
+
+</html>
